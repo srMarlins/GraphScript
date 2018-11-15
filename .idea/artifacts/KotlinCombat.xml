@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="KotlinCombat">
+  <artifact type="jar" build-on-make="true" name="KotlinCombat">
     <output-path>$USER_HOME$/DreamBot/Scripts</output-path>
     <root id="archive" name="KotlinCombat.jar">
       <element id="module-output" name="KotlinCombatScript" />
