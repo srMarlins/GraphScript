@@ -15,9 +15,10 @@ import org.dreambot.api.script.ScriptManifest
 )
 
 class KotlinMain : AbstractScript() {
+    val fight = FightAction(this, GOBLIN_AREA, "Goblin")
     override fun onLoop(): Int {
-        val fightAction = FightAction(this, GOBLIN_AREA, "Goblin")
-        fightAction.execute()
+        fight.execute()
+        //walking.walk(GOBLIN_AREA.randomTile)
         return 1000
     }
 

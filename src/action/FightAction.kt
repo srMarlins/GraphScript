@@ -6,13 +6,13 @@ import org.dreambot.api.methods.map.Area
 import org.dreambot.api.script.AbstractScript
 import org.dreambot.api.wrappers.interactive.NPC
 
-open class FightAction(val script: AbstractScript, val area: Area, val npc: String) : BaseAction() {
+open class FightAction(private val script: AbstractScript, private val area: Area, val npc: String) {
 
     private val npcFilter = Filter<NPC> {
         it?.name == npc && it.isHealthBarVisible.not()
     }
 
-    public override fun execute() {
+    fun execute() {
         when {
             script.localPlayer.isInCombat -> {
             }
@@ -22,6 +22,8 @@ open class FightAction(val script: AbstractScript, val area: Area, val npc: Stri
             else -> {
                 script.walking.walk(area.randomTile)
             }
+
         }
+        script.walking.walk(area.randomTile)
     }
 }
