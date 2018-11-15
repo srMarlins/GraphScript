@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="client">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/client.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/gamepack.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
