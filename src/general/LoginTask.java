@@ -1,6 +1,7 @@
-package task;
+package general;
 
 import util.PriorityMatrix;
+import util.RandomTaskNode;
 
 public class LoginTask extends RandomTaskNode {
 
@@ -23,12 +24,12 @@ public class LoginTask extends RandomTaskNode {
     }
 
     @Override
-    int getMaxExecutionTime() {
+    protected int getMaxExecutionTime() {
         return 20000;
     }
 
     @Override
-    int getMinExecutionTime() {
+    protected int getMinExecutionTime() {
         return 5000;
     }
 }

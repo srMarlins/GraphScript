@@ -1,10 +1,11 @@
-package task;
+package combat;
 
 import npc.NpcModel;
 import org.dreambot.api.methods.filter.Filter;
 import org.dreambot.api.methods.map.Area;
 import org.dreambot.api.wrappers.interactive.NPC;
 import util.PriorityMatrix;
+import util.RandomTaskNode;
 
 public class CombatTask extends RandomTaskNode {
 
@@ -27,6 +28,7 @@ public class CombatTask extends RandomTaskNode {
 
     @Override
     public boolean accept() {
+        log("Combat: accept");
         return !getLocalPlayer().isInCombat() && getFightArea().contains(getLocalPlayer());
     }
 
@@ -51,16 +53,16 @@ public class CombatTask extends RandomTaskNode {
     }
 
     @Override
-    int getMaxExecutionTime() {
+    public int getMaxExecutionTime() {
         return 900;
     }
 
     @Override
-    int getMinExecutionTime() {
+    protected int getMinExecutionTime() {
         return 100;
     }
 
-    private Area getFightArea() {
+    protected Area getFightArea() {
         return this.npcToFight.area();
     }
 }

@@ -1,14 +1,15 @@
-package task;
+package general;
 
 import org.dreambot.api.methods.map.Area;
 import util.PriorityMatrix;
+import util.RandomTaskNode;
 
-public class WalkNode extends RandomTaskNode {
+public class WalkTask extends RandomTaskNode {
 
     private Area walkArea;
     private PriorityMatrix priorityMatrix = new PriorityMatrix(PriorityMatrix.Priority.LOW, PriorityMatrix.Priority.LOW, PriorityMatrix.Priority.LOW);
 
-    public WalkNode(Area to) {
+    public WalkTask(Area to) {
         this.walkArea = to;
     }
 
@@ -34,12 +35,12 @@ public class WalkNode extends RandomTaskNode {
     }
 
     @Override
-    int getMaxExecutionTime() {
+    protected int getMaxExecutionTime() {
         return 2000;
     }
 
     @Override
-    int getMinExecutionTime() {
+    protected int getMinExecutionTime() {
         return 1000;
     }
 }

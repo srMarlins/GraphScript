@@ -1,4 +1,4 @@
-package task;
+package util;
 
 import org.dreambot.api.script.TaskNode;
 
@@ -18,8 +18,6 @@ public abstract class RandomTaskNode extends TaskNode {
         return random.nextInt((getMaxExecutionTime() - getMinExecutionTime()) + 1) + getMaxExecutionTime();
     }
 
-    abstract int getMaxExecutionTime();
-    abstract int getMinExecutionTime();
-
-
+    protected abstract int getMaxExecutionTime();
+    protected abstract int getMinExecutionTime();
 }
