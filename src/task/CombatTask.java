@@ -16,6 +16,7 @@ public class CombatTask extends RandomTaskNode {
     public CombatTask(NpcModel npcToFight) {
         this.npcToFight = npcToFight;
         this.npcFilter = npc -> this.npcToFight.name().equals(npc.getName()) && !npc.isHealthBarVisible();
+        getCombat().toggleAutoRetaliate(false);
     }
 
 
@@ -36,7 +37,12 @@ public class CombatTask extends RandomTaskNode {
         if (closest == null) {
             log("Combat: Walking");
             getWalking().walk(getFightArea().getRandomTile());
-        } else if(!getLocalPlayer().isInCombat()) {
+            return super.execute();
+        }
+
+        if (getCombat().getSpecialPercentage() >= 50) getCombat().toggleSpecialAttack(true);
+
+        if (!getLocalPlayer().isInCombat()) {
             log("Combat: attack");
             closest.interact("Attack");
         }
