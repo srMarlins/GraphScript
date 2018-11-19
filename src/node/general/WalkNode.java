@@ -1,21 +1,15 @@
-package general;
+package node.general;
 
+import node.graph.GraphNode;
 import org.dreambot.api.methods.map.Area;
-import util.PriorityMatrix;
-import util.RandomTaskNode;
+import util.Priority;
 
-public class WalkTask extends RandomTaskNode {
+public class WalkNode extends GraphNode {
 
     private Area walkArea;
-    private PriorityMatrix priorityMatrix = new PriorityMatrix(PriorityMatrix.Priority.LOW, PriorityMatrix.Priority.LOW, PriorityMatrix.Priority.LOW);
 
-    public WalkTask(Area to) {
+    public WalkNode(Area to) {
         this.walkArea = to;
-    }
-
-    @Override
-    public int priority() {
-        return priorityMatrix.getPriorityValue();
     }
 
     @Override
@@ -26,7 +20,7 @@ public class WalkTask extends RandomTaskNode {
     @Override
     public int execute() {
         log("Walk: execute");
-        if(this.walkArea.contains(this.getLocalPlayer()) || !getWalking().shouldWalk()) return super.execute();
+        if (this.walkArea.contains(this.getLocalPlayer()) || !getWalking().shouldWalk()) return super.execute();
 
         log("Walk: walking");
         getWalking().walk(walkArea.getRandomTile());
@@ -42,5 +36,15 @@ public class WalkTask extends RandomTaskNode {
     @Override
     protected int getMinExecutionTime() {
         return 1000;
+    }
+
+    @Override
+    protected int getTaskOrder() {
+        return Priority.LOW.value();
+    }
+
+    @Override
+    protected int getSituationalImportance() {
+        return Priority.LOW.value();
     }
 }

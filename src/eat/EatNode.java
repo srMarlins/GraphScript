@@ -2,25 +2,19 @@ package eat;
 
 import com.sun.istack.internal.NotNull;
 import eat.edible.Edible;
+import node.graph.GraphNode;
 import org.dreambot.api.methods.tabs.Tab;
 import org.dreambot.api.wrappers.items.Item;
-import util.PriorityMatrix;
-import util.RandomTaskNode;
+import util.Priority;
 
-public class EatTask extends RandomTaskNode {
+public class EatNode extends GraphNode {
 
     private final int healLimit;
     private final Edible edible;
-    private final PriorityMatrix priorityMatrix = new PriorityMatrix(PriorityMatrix.Priority.LOW, PriorityMatrix.Priority.HIGH, PriorityMatrix.Priority.HIGH);
 
-    public EatTask(Edible food, int healLimitPercentage) {
+    public EatNode(Edible food, int healLimitPercentage) {
         this.edible = food;
         this.healLimit = healLimitPercentage;
-    }
-
-    @Override
-    public int priority() {
-        return priorityMatrix.getPriorityValue();
     }
 
     @Override
@@ -33,7 +27,7 @@ public class EatTask extends RandomTaskNode {
     @Override
     public int execute() {
         log("Eat: Execute");
-        if (getCombat().getHealthPercent() > this.healLimit) super.execute();
+        if (getCombat().getHealthPercent() > this.healLimit) return super.execute();
 
         if (getTabs().isOpen(Tab.INVENTORY) || getTabs().open(Tab.INVENTORY)) {
             consumeItem(getFoodItem());
@@ -50,6 +44,16 @@ public class EatTask extends RandomTaskNode {
     @Override
     protected int getMinExecutionTime() {
         return 50;
+    }
+
+    @Override
+    protected int getTaskOrder() {
+        return Priority.HIGH.value();
+    }
+
+    @Override
+    protected int getSituationalImportance() {
+        return Priority.HIGH.value() / getCombat().getHealthPercent();
     }
 
     private Item getFoodItem() {

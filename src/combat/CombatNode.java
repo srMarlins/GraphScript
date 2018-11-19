@@ -1,29 +1,20 @@
 package combat;
 
+import node.RootNode;
 import npc.NpcModel;
 import org.dreambot.api.methods.filter.Filter;
 import org.dreambot.api.methods.map.Area;
 import org.dreambot.api.wrappers.interactive.NPC;
-import util.PriorityMatrix;
-import util.RandomTaskNode;
 
-public class CombatTask extends RandomTaskNode {
-
+public class CombatNode extends RootNode {
 
     private Filter<NPC> npcFilter;
     private NpcModel npcToFight;
-    private PriorityMatrix priorityMatrix = new PriorityMatrix(PriorityMatrix.Priority.HIGH, PriorityMatrix.Priority.MED, PriorityMatrix.Priority.HIGH);
 
-    public CombatTask(NpcModel npcToFight) {
+    public CombatNode(NpcModel npcToFight) {
         this.npcToFight = npcToFight;
         this.npcFilter = npc -> this.npcToFight.name().equals(npc.getName()) && !npc.isHealthBarVisible();
         getCombat().toggleAutoRetaliate(false);
-    }
-
-
-    @Override
-    public int priority() {
-        return priorityMatrix.getPriorityValue();
     }
 
     @Override
@@ -42,7 +33,7 @@ public class CombatTask extends RandomTaskNode {
             return super.execute();
         }
 
-        if (getCombat().getSpecialPercentage() >= 50) getCombat().toggleSpecialAttack(true);
+        toggleSpecialAttack();
 
         if (!getLocalPlayer().isInCombat()) {
             log("Combat: attack");
@@ -62,7 +53,12 @@ public class CombatTask extends RandomTaskNode {
         return 100;
     }
 
-    protected Area getFightArea() {
+
+    private Area getFightArea() {
         return this.npcToFight.area();
+    }
+
+    private void toggleSpecialAttack() {
+        if (getCombat().getSpecialPercentage() >= 50) getCombat().toggleSpecialAttack(true);
     }
 }
