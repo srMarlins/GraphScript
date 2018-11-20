@@ -13,6 +13,7 @@ public abstract class GraphNode extends TaskNode implements Registrar<MethodCont
     private final Random random = new Random();
     private final List<GraphNode> childNodes = new ArrayList<>();
     private final Comparator<TaskNode> prioritySortOrder = Comparator.comparingInt(TaskNode::priority);
+    private boolean isRegistered = false;
 
     @Override
     public int priority() {
@@ -42,8 +43,13 @@ public abstract class GraphNode extends TaskNode implements Registrar<MethodCont
         return optional == null || !optional.isPresent() ? null : optional.get();
     }
 
-    public boolean addNode(@NotNull GraphNode node) {
-        if (!register(node)) return false;
+    public boolean addNode(@NotNull GraphNode node, @NotNull Registrar<GraphNode> registrar) {
+        if (!registrar.register(node)) {
+            node.setRegistered(false);
+            return false;
+        }
+
+        node.setRegistered(true);
         childNodes.add(node);
         childNodes.sort(prioritySortOrder);
         return true;
@@ -60,6 +66,14 @@ public abstract class GraphNode extends TaskNode implements Registrar<MethodCont
 
     public List<GraphNode> getChildNodes() {
         return this.childNodes;
+    }
+
+    public boolean isRegistered() {
+        return this.isRegistered;
+    }
+
+    public void setRegistered(boolean registered) {
+        this.isRegistered = registered;
     }
 
     protected abstract int getMaxExecutionTime();

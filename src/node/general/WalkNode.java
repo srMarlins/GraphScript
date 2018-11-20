@@ -19,10 +19,8 @@ public class WalkNode extends GraphNode {
 
     @Override
     public int execute() {
-        log("Walk: execute");
         if (this.walkArea.contains(this.getLocalPlayer()) || !getWalking().shouldWalk()) return super.execute();
 
-        log("Walk: walking");
         getWalking().walk(walkArea.getRandomTile());
 
         return super.execute();

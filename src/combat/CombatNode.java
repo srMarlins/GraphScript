@@ -14,7 +14,7 @@ public class CombatNode extends RootNode {
     public CombatNode(NpcModel npcToFight) {
         this.npcToFight = npcToFight;
         this.npcFilter = npc -> this.npcToFight.name().equals(npc.getName()) && !npc.isHealthBarVisible();
-        getCombat().toggleAutoRetaliate(false);
+        //getCombat().toggleAutoRetaliate(false);
     }
 
     @Override

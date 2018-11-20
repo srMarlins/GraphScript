@@ -1,27 +1,29 @@
 package node.graph;
 
 import com.sun.istack.internal.NotNull;
-import exception.ScriptInitException;
 import node.Registrar;
 import org.dreambot.api.script.AbstractScript;
-import org.dreambot.api.script.TaskNode;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.stream.Collectors;
 
-public abstract class GraphScript extends AbstractScript implements Registrar<TaskNode> {
+public abstract class GraphScript extends AbstractScript implements Registrar<GraphNode> {
 
     private boolean scriptRunning = false;
     private Queue<GraphNode> executionQueue = new PriorityQueue<>();
 
+
     @Override
     public void onStart() {
+        log("start");
         super.onStart();
-        buildGraph();
-        if (!registerNodes(buildGraph())) {
+        register(buildGraph());
+        /*if (!registerNodes(buildGraph())) {
             throw new ScriptInitException();
-        }
+        }*/
         executionQueue.add(getRoot());
     }
 
@@ -42,7 +44,7 @@ public abstract class GraphScript extends AbstractScript implements Registrar<Ta
     }
 
     @Override
-    public boolean register(TaskNode candidate) {
+    public boolean register(GraphNode candidate) {
         candidate.passInstance(getClient().getInstance());
         candidate.registerContext(getClient());
         return true;
@@ -72,13 +74,14 @@ public abstract class GraphScript extends AbstractScript implements Registrar<Ta
     }
 
     private boolean registerNodes(@NotNull final GraphNode root) {
-        final Queue<GraphNode> nodeQueue = new ArrayDeque<>();
+        final Queue<GraphNode> unRegisteredQueue = new ArrayDeque<>();
         boolean allRegistered = true;
-        nodeQueue.add(root);
-        while (!nodeQueue.isEmpty() && allRegistered) {
-            GraphNode node = nodeQueue.poll();
-            allRegistered = register(node);
-            nodeQueue.addAll(node.getChildNodes());
+        unRegisteredQueue.add(root);
+        while (!unRegisteredQueue.isEmpty() && allRegistered) {
+            GraphNode node = unRegisteredQueue.poll();
+            if (!node.isRegistered()) allRegistered = register(node);
+            unRegisteredQueue.addAll(unRegisteredQueue.stream().filter(childNode -> !childNode.isRegistered()).collect(Collectors.toCollection(ArrayList::new)));
+
         }
         return allRegistered;
     }
