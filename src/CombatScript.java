@@ -1,11 +1,11 @@
 import combat.CombatNode;
 import eat.EatNode;
-import node.Registrar;
+import eat.edible.EdibleItemListFactory;
 import node.RootNode;
 import node.general.WalkNode;
 import node.graph.GraphNode;
 import node.graph.GraphScript;
-import npc.Goblin;
+import npc.monster.Goblin;
 import npc.NpcModel;
 import org.dreambot.api.script.Category;
 import org.dreambot.api.script.ScriptManifest;
@@ -19,30 +19,8 @@ import org.dreambot.api.script.ScriptManifest;
 )
 public class CombatScript extends GraphScript {
 
-
     private NpcModel goblin = new Goblin();
     private RootNode rootNode = new CombatNode(goblin);
-
-    @Override
-    public void onStart(final String... strings) {
-        log("onStart");
-        super.onStart(strings);
-    }
-
-    @Override
-    public void onStart() {
-        log("start");
-        super.onStart();
-        //addNodes(new EatNode(EdibleItemListFactory.availableEdibleMap.get(315), 20));
-        //addNodes(new WalkNode(goblin.area()));
-        //addNodes(new CombatNode(goblin));
-    }
-
-    @Override
-    public int onLoop() {
-        log("loop");
-        return super.onLoop();
-    }
 
     @Override
     public GraphNode getRoot() {
@@ -53,6 +31,7 @@ public class CombatScript extends GraphScript {
     protected GraphNode buildGraph() {
         GraphNode root = getRoot();
         root.addNode(new WalkNode(goblin.area()), this);
+        root.addNode(new EatNode(EdibleItemListFactory.getAllEdibles().get(0), 20), this);
         return root;
     }
 }

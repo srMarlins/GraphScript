@@ -11,7 +11,7 @@ public class EdibleItemListFactory {
 
     public static List<Edible> getAllEdibles() {
         ArrayList<Edible> list = new ArrayList<>();
-        list.add(EdibleFactory.newEatEdible(315, "Shrimp", 2));
+        list.add(EdibleFactory.newEatEdible(315, "Shrimp"));
         return list;
     }
 

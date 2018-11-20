@@ -2,6 +2,7 @@ package combat;
 
 import node.RootNode;
 import npc.NpcModel;
+import org.dreambot.api.methods.MethodProvider;
 import org.dreambot.api.methods.filter.Filter;
 import org.dreambot.api.methods.map.Area;
 import org.dreambot.api.wrappers.interactive.NPC;
@@ -14,21 +15,17 @@ public class CombatNode extends RootNode {
     public CombatNode(NpcModel npcToFight) {
         this.npcToFight = npcToFight;
         this.npcFilter = npc -> this.npcToFight.name().equals(npc.getName()) && !npc.isHealthBarVisible();
-        //getCombat().toggleAutoRetaliate(false);
     }
 
     @Override
     public boolean accept() {
-        log("Combat: accept");
         return !getLocalPlayer().isInCombat() && getFightArea().contains(getLocalPlayer());
     }
 
     @Override
     public int execute() {
-        log("Combat: execute");
         NPC closest = getNpcs().closest(npcFilter);
         if (closest == null) {
-            log("Combat: Walking");
             getWalking().walk(getFightArea().getRandomTile());
             return super.execute();
         }
@@ -36,8 +33,8 @@ public class CombatNode extends RootNode {
         toggleSpecialAttack();
 
         if (!getLocalPlayer().isInCombat()) {
-            log("Combat: attack");
             closest.interact("Attack");
+            //MethodProvider.sleepUntil(() -> getLocalPlayer().isInCombat(),getMaxExecutionTime());
         }
 
         return super.execute();
@@ -45,12 +42,12 @@ public class CombatNode extends RootNode {
 
     @Override
     public int getMaxExecutionTime() {
-        return 900;
+        return 1500;
     }
 
     @Override
     protected int getMinExecutionTime() {
-        return 100;
+        return 1000;
     }
 
 

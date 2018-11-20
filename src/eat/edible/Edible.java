@@ -7,9 +7,6 @@ public interface Edible {
     String getAction();
 
     @NotNull
-    int hitPointValue();
-
-    @NotNull
     String name();
 
     @NotNull

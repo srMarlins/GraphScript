@@ -1,5 +1,6 @@
-package npc;
+package npc.monster;
 
+import npc.NpcModel;
 import org.dreambot.api.methods.map.Area;
 
 import java.util.ArrayList;

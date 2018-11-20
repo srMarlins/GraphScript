@@ -1,6 +1,7 @@
 package node.general;
 
 import node.graph.GraphNode;
+import org.dreambot.api.methods.MethodProvider;
 import org.dreambot.api.methods.map.Area;
 import util.Priority;
 
@@ -22,6 +23,8 @@ public class WalkNode extends GraphNode {
         if (this.walkArea.contains(this.getLocalPlayer()) || !getWalking().shouldWalk()) return super.execute();
 
         getWalking().walk(walkArea.getRandomTile());
+
+        MethodProvider.sleepUntil(() -> getLocalPlayer().isStandingStill(), getMaxExecutionTime());
 
         return super.execute();
     }

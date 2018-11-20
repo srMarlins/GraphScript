@@ -5,13 +5,11 @@ import com.sun.istack.internal.NotNull;
 public class GenericEdible implements Edible {
 
     private String action;
-    private int hitPointValue;
     private String name;
     private int id;
 
-    GenericEdible(@NotNull int itemId, @NotNull String itemName, @NotNull String action, @NotNull int hitPointValue) {
+    GenericEdible(@NotNull int itemId, @NotNull String itemName, @NotNull String action) {
         this.action = action;
-        this.hitPointValue = hitPointValue;
         this.name = itemName;
         this.id = itemId;
     }
@@ -22,11 +20,6 @@ public class GenericEdible implements Edible {
         return this.action;
     }
 
-    @NotNull
-    @Override
-    public int hitPointValue() {
-        return this.hitPointValue;
-    }
 
     @NotNull
     @Override
