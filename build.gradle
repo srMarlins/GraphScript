@@ -1,0 +1,56 @@
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.10'
+}
+
+repositories {
+    mavenCentral()
+}
+
+version scriptVersion
+sourceCompatibility = 1.8
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile 'com.intellij:annotations:+@jar'
+    testCompile 'junit:junit:4.12'
+}
+
+sourceSets.main.java.srcDirs = ['build/generated/source','src/main/java']
+
+task generateConfigFiles {
+    inputs.property "version", version
+    outputs.dir "$buildDir/generated"
+    def sourcePackageName = "source"
+    def className = "BuildConfig"
+    def fileType = ".java"
+
+    doFirst {
+        def versionFile = file("$buildDir/generated/$sourcePackageName/$className$fileType")
+        println(versionFile.absolutePath)
+        versionFile.parentFile.mkdirs()
+        versionFile.text =
+                """
+package $packageName;
+
+public class $className {
+	public static final double BUILD_VERSION = $version;
+}
+"""
+    }
+}
+
+compileJava.dependsOn generateConfigFiles
+
+task copyJar(type: Copy) {
+    def newFile = file(outputJarDir).absoluteFile
+    if(!newFile.exists()) {
+        mkdir(newFile)
+    }
+
+    from jar.archivePath.absoluteFile
+    into newFile
+}
+
+assemble.dependsOn(copyJar)

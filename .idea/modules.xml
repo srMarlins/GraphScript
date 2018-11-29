@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GraphScript.iml" filepath="$PROJECT_DIR$/GraphScript.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GraphScript.iml" filepath="$PROJECT_DIR$/.idea/modules/GraphScript.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GraphScript.main.iml" filepath="$PROJECT_DIR$/.idea/modules/GraphScript.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GraphScript.test.iml" filepath="$PROJECT_DIR$/.idea/modules/GraphScript.test.iml" />
     </modules>
   </component>
 </project>

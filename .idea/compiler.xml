@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="behavior.kotlin.GraphScript.main" target="1.8" />
+      <module name="behavior.kotlin.GraphScript.test" target="1.8" />
+      <module name="behaviour-script.GraphScript.main" target="1.8" />
+      <module name="behaviour-script.GraphScript.test" target="1.8" />
+      <module name="behaviour.GraphScript.main" target="1.8" />
+      <module name="behaviour.GraphScript.test" target="1.8" />
+      <module name="GraphScript.main" target="1.8" />
+      <module name="GraphScript.test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
