@@ -1,3 +1,5 @@
 rootProject.name = 'GraphScript'
 
+include(":core-ai")
+
 

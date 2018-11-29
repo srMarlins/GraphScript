@@ -8,6 +8,12 @@
       <module name="behaviour-script.GraphScript.test" target="1.8" />
       <module name="behaviour.GraphScript.main" target="1.8" />
       <module name="behaviour.GraphScript.test" target="1.8" />
+      <module name="core-ai.main" target="1.8" />
+      <module name="core-ai.test" target="1.8" />
+      <module name="graph.core-ai.main" target="1.8" />
+      <module name="graph.core-ai.test" target="1.8" />
+      <module name="GraphScript.core-ai.main" target="1.8" />
+      <module name="GraphScript.core-ai.test" target="1.8" />
       <module name="GraphScript.main" target="1.8" />
       <module name="GraphScript.test" target="1.8" />
     </bytecodeTargetLevel>

@@ -5,6 +5,8 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url "https://oss.sonatype.org/content/repositories/releases/" }
 }
 
 version scriptVersion
@@ -12,8 +14,9 @@ sourceCompatibility = 1.8
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    compile 'com.intellij:annotations:+@jar'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation 'com.intellij:annotations:+@jar'
+    compile project("core-ai")
     testCompile 'junit:junit:4.12'
 }
 
@@ -28,7 +31,6 @@ task generateConfigFiles {
 
     doFirst {
         def versionFile = file("$buildDir/generated/$sourcePackageName/$className$fileType")
-        println(versionFile.absolutePath)
         versionFile.parentFile.mkdirs()
         versionFile.text =
                 """

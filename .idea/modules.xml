@@ -3,8 +3,14 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/GraphScript.iml" filepath="$PROJECT_DIR$/.idea/modules/GraphScript.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core-ai/GraphScript.core-ai.iml" filepath="$PROJECT_DIR$/.idea/modules/core-ai/GraphScript.core-ai.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core-ai/GraphScript.core-ai.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core-ai/GraphScript.core-ai.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core-ai/GraphScript.core-ai.test.iml" filepath="$PROJECT_DIR$/.idea/modules/core-ai/GraphScript.core-ai.test.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/GraphScript.main.iml" filepath="$PROJECT_DIR$/.idea/modules/GraphScript.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/GraphScript.test.iml" filepath="$PROJECT_DIR$/.idea/modules/GraphScript.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core-ai.iml" filepath="$PROJECT_DIR$/.idea/modules/core-ai.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core-ai.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core-ai.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core-ai.test.iml" filepath="$PROJECT_DIR$/.idea/modules/core-ai.test.iml" />
     </modules>
   </component>
 </project>

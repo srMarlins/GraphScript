@@ -9,6 +9,7 @@ import common.node.graph.GraphNode;
 import common.node.graph.GraphScript;
 import common.npc.NpcModel;
 import common.npc.monster.Goblin;
+import core.CoreAI;
 import org.dreambot.api.script.Category;
 import org.dreambot.api.script.ScriptManifest;
 
@@ -23,6 +24,7 @@ import static common.BuildConfig.BUILD_VERSION;
 )
 public class CombatScript extends GraphScript {
 
+    private CoreAI coreAI = new CoreAI();
     private NpcModel goblin = new Goblin();
     private RootNode rootNode = new CombatNode(goblin);
 
